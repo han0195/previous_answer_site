@@ -5,6 +5,7 @@ import kbuni_question.domain.*;
 import kbuni_question.dto.TestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -22,6 +23,7 @@ public class AdminService {
     TcategoryRepository tcategoryRepository;
 
     // 1. 시험지 등록
+    @Transactional
     public boolean inserttest(TestDto testDto) {
 
         //카테고리 저장
@@ -29,13 +31,15 @@ public class AdminService {
         boolean pass = false; // 카테고리존재여부
         List<TcategoryEntity> tcategoryEntities = tcategoryRepository.findAll();
         for (TcategoryEntity temp : tcategoryEntities) {
-            if (temp.equals(testDto.getTcname())) { // 카테고리가 존재하면
+            System.out.println(temp.getTcname());
+            if (temp.getTcname().equals(testDto.getTcname())) { // 카테고리가 존재하면
                 tcategoryEntity = tcategoryRepository.findById(temp.getTcno()).get();
                 pass = true;
                 break;
             }
         }
-        if (!pass) {// 카테고리가 존재하지않으면
+        if (pass == false) {// 카테고리가 존재하지않으면
+            System.out.println("pass: " + pass);
             tcategoryEntity = TcategoryEntity.builder()
                     .tcname(testDto.getTcname())
                     .build();
