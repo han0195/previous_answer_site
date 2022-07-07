@@ -1,0 +1,40 @@
+/*http://www.colorhunter.com/ 테마컬러*/
+#mainbody{
+    background-image: url("../img/bmain.png");
+    height: 100%;
+}
+
+/* 컨테이너 */
+.maindiv{
+    position: relative;
+    height: 100vh;
+
+}
+
+/*문제풀기 버튼*/
+.startbtn{
+    padding: 10px 50px;
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #C5D2FC;
+    color: black;
+    border: 0px;
+}
+/* 제목 div */
+.titlediv{
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 25%;
+    transform: translate(-50%, -50%);
+    color: #C5D2FC;
+}
+
+/* 어드민 페이지 전환 링크 */
+.adminpage{
+    position: absolute;
+    opacity: 0;
+    left: 50%;
+}
