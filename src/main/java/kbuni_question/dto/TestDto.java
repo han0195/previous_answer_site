@@ -17,8 +17,8 @@ public class TestDto {
 
     private int tno; // 시험지번호
     private String tname; // 시험지이름
-    private int tgrade; // 학년
-    private int tyear; // 기출연도
+    private String tgrade; // 학년
+    private String tyear; // 기출연도
     private String tanswer; // 시험답지
     private String testof; //시험구분
 
