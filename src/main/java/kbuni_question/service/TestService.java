@@ -45,9 +45,12 @@ public class TestService {
         for(TestEntity temp : testEntities){
             JSONObject object = new JSONObject();
             object.put("tno" ,temp.getTno());
-            object.put("tname",temp.getTname());
+            object.put("tanswer", temp.getTanswer());
             object.put("testof", temp.getTestof());
+            object.put("tgrade", temp.getTgrade());
+            object.put("tname",temp.getTname());
             object.put("tyear", temp.getTyear());
+            object.put("tcno", temp.getTno());
             jsonArray.put(object);
         }
         return jsonArray;

@@ -1,4 +1,6 @@
 
+let testlist; // 시험리스트
+
 // db상의 존재하는 카테고리 json 가져오기 html 뿌리기
 function gettestlist() {
     $.ajax({
@@ -42,12 +44,20 @@ $("#gradech").on("change", function (){
             url:"/test/tgettestlist",
             data: {"tcno" : tcno, "tgrade" : tempchack},
             success : function (re) {
+                testlist = re;
+                console.log(testlist);
                 if(re.length == 0){ // 과목이 존재하지않으면
                     alert("해당과목은 존재하지않습니다.");
                 }else{
                     let html = '<option value="N">과목선택</option>>';
+                    let withchar = []; // 중복이름 방지
                     for(let i = 0; i < re.length; i++){
-                        html += '<option value="'+re[i].tno+'">'+re[i].tname+'</option>';
+                        if(withchar.indexOf(re[i].tname) != -1){// 중복된이름이 있으면
+
+                        }else{
+                            html += '<option value="'+re[i].tname+'">'+re[i].tname+'</option>';
+                            withchar.push(re[i].tname); // 이름을 배열의 넣어서 중복 html 방지
+                        }
                     }
                     $("#testtitle").html(html);
                 }
@@ -66,6 +76,13 @@ $("#testtitle").on("change", function (){
         $("#testtyear").css({"display" : "none"});
     }else{ // 카테고리를 선택했다면
         // 다음 선택 창 보여주기
+        let html = "<option value='N'>시험구분선택</option>";
+        for(let i = 0; i < testlist.length ; i++){
+            if(testlist[i].tname == tempchack){ // 해당과목의 시험구분넣어주기
+                html += '<option value="'+testlist[i].testof+'">'+testlist[i].testof+'</option>';
+            }
+        }
+        $("#testof").html(html)
         $("#testof").css({"display" : ""});
     };
 });
@@ -73,11 +90,19 @@ $("#testtitle").on("change", function (){
 // 시험구분 select change 이벤트
 $("#testof").on("change", function (){
     let tempchack = $("#testof").val();
+    let testtitle = $("#testtitle").val();
     if(tempchack == "N"){ // 기본선택이라면
-
+        $("#testtyear").css({"display" : "none"});
     }else{ // 카테고리를 선택했다면
+        let html = "<option value='N'>기출연도선택</option>";
+        for(let i = 0 ; i < testlist.length ; i++){
+            if(testlist[i].tname == testtitle && testlist[i].testof == tempchack){ // 해당 과목과 해당 시험구분이 일치하다면
+                html += '<option value="'+testlist[i].tno+'">'+testlist[i].tyear+'</option>';
+            }
+        }
+        $("#testtyear").html(html);
         // 다음 선택 창 보여주기
-        $("#testtitle").css({"display" : ""});
+        $("#testtyear").css({"display" : ""});
     };
 });
 
