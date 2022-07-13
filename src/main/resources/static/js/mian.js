@@ -1,8 +1,22 @@
 
 let testlist; // 시험리스트
 
+
+
+///// 시험 선택 메소드 ///////////////////////////////////////////////////
 // db상의 존재하는 카테고리 json 가져오기 html 뿌리기
 function gettestlist() {
+    //문제풀이 버튼 눌렀을때 select val() 값 "N" 로 초기화
+    $("#catselect").val("N");
+    $("#gradech").val("N");
+    $("#testtitle").val("N");
+    $("#testof").val("N");
+    $("#testtyear").val("N");
+    //문제풀이 버튼 눌렀을때 display 초기화
+    $("#gradech").css({"display" : "none"});
+    $("#testtitle").css({"display" : "none"});
+    $("#testof").css({"display" : "none"});
+    $("#testtyear").css({"display" : "none"});
     $.ajax({
        url:"/test/getcatlist",
        success : function (re){
@@ -32,7 +46,6 @@ $("#catselect").on("change", function (){
 // 학년선택 select change 이벤트
 $("#gradech").on("change", function (){
     let tempchack = $("#gradech").val();
-    alert(tempchack);
     let tcno = $("#catselect").val();
     if(tempchack == "N"){ // 기본선택이라면
         $("#testtitle").css({"display" : "none"});
@@ -114,4 +127,4 @@ $("#testtyear").on("change", function (){
 
     };
 });
-
+///// 시험 선택 메소드 end ///////////////////////////////////////////////////

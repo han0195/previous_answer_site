@@ -38,4 +38,12 @@
     opacity: 0;
     left: 50%;
 }
+/* 모달2 창 */
+.modal2_cantanier{
+    text-align: center;
+}
+#gradech, #testtitle, #testtitle, #testof, #testtyear{
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
 
