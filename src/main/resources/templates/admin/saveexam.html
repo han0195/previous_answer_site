@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="header.html::header"></div>
+
+<div class="container">
+
+
+    <form id="info" name="info" class="form-control">
+        <div class="row">
+            <div class="col-sm-3"> <h3>카테고리</h3> </div>
+            <div class="col-sm-9">
+                <input id="cname" name="cname" class="form-control" type="text" value="한국방송통신대학교" readonly>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3">학과 이름: </div>
+            <div class="col-sm-9">
+                <select id="dname" name="dname" class="form-control">
+                    <option value="컴퓨터과학과"> 컴퓨터과학과 </option>
+                    <option value="통계데이터학과"> 통계데이터학과 </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3">기출구분: </div>
+            <div class="col-sm-9">
+                <select id="tquarter" name="tquarter" class="form-control">
+                    <option value="1학기기말고사">1학기기말고사</option>
+                    <option value="2학기기말고사">2학기기말고사</option>
+                    <option value="동계계절">동계계절</option>
+                    <option value="1학기출석대체">1학기출석대체</option>
+                    <option value="2학기출석대체">2학기출석대체</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3">시험지제목: </div>
+            <div class="col-sm-9">
+                <input id="tname" name="tname" class="form-control" type="text">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3">기출연도: </div>
+            <div class="col-sm-9">
+                <input id="tyear" name="tyear" class="form-control" type="text">
+            </div>
+        </div>
+
+        <button type="button" class="form-control btn btn-primary" onclick="examinfosave()">시험정보등록</button>
+
+    </form>
+
+</div>
+
+<div th:replace="footer.html::footer"></div>
+
+<!-- 사용자지정 js -->
+<script src="/js/saveexam.js"></script>
+
+</body>
+</html>
+<!--
+ <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-9">
+            </div>
+        </div>
+-->
