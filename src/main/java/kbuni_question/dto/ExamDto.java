@@ -15,8 +15,11 @@ import java.util.List;
 @Builder
 public class ExamDto {
 
+    private int cno;
     private String cname;
+    private int dno;
     private String dname;
+    private int tno;
     private String tname;
     private String tyear;
     private String tquarter;
@@ -27,6 +30,7 @@ public class ExamDto {
     //카테고리 entity 변환
     public CategoryEntity categorytoentity(){
         return CategoryEntity.builder()
+                .cno(this.cno)
                 .cname(this.cname)
                 .build();
     }
@@ -34,6 +38,7 @@ public class ExamDto {
     //학과 entity 변환
     public DepartmentEntity departmenttoentity(){
         return DepartmentEntity.builder()
+                .dno(this.dno)
                 .dname(this.dname)
                 .build();
     }
@@ -41,6 +46,7 @@ public class ExamDto {
     //시험 정보 entity 변환
     public TestinformationEntity testinformationtoentity(){
         return TestinformationEntity.builder()
+                .tno(this.tno)
                 .tname(this.tname)
                 .tyear(this.tyear)
                 .tquarter(this.tquarter)
