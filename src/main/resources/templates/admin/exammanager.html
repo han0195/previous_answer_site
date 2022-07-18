@@ -13,9 +13,57 @@
         </tr>
     </table>
 
-    <div> <h3>문제</h3> <button class="btn btn-primary"> 문제 추가 </button> </div>
-
     <div>
+        <h3>문제</h3>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> 문제 추가 </button>
+    </div>
+
+    <div><!-- 문제리스트 출력창 -->
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade modal-dialog modal-dialog-centered modal-dialog-scrollable" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">문제추가</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-3">문제제목</div>
+                        <div class="col-sm-9"><input type="text" class="form-control"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            이미지
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="file" class="form-control" multiple>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">문제보기</div>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="text">
+                            <span>"_로 문제보기를 구분해주세요"</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">문제정답</div>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="text">
+                            <span> 중복문제일 경우 , 로 구분해주세요</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

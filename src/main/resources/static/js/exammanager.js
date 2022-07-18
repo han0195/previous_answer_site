@@ -1,6 +1,6 @@
-getinfo()
+getinfo();
 
-
+// 시험지 정보 가져오는 함수
 function getinfo(){
     $.ajax({
         url: '/admin/getinfo',
@@ -18,9 +18,12 @@ function getinfo(){
             html += '<th>'+re.tquarter+'</th>';
             html += '<th>'+re.pcount+'</th>';
             html += '</tr>';
-
             $("#infotable").html(html);
         }
-
     })
+}
+
+
+function addexam(){
+
 }
