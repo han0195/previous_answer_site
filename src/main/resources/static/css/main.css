@@ -1,0 +1,21 @@
+
+.first_div{
+    height: 60vh;
+    background-color: #334557;
+    padding: 80px 60px;
+}
+.first_div_img{
+    height: 100%;
+    background-image: url("/img/bmain.png");
+    background-position: center center;
+    padding: 30px;
+}
+.first_div_text{
+    color: white;
+    display: inline-block;
+    position: relative;
+    top: 10vh;
+}
+.first_div_btn{
+    margin-top: 20px;
+}

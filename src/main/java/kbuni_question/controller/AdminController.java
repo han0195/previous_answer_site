@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
@@ -25,6 +26,26 @@ public class AdminController {
     @GetMapping("/saveexam")
     public String move() {
         return "/admin/saveexam";
+    }
+
+    // 문제관리 페이지 이동
+    @GetMapping("/pmanager")
+    public String movepmanager(){
+        return "/admin/exammanager";
+    }
+    
+    // 문제관리의 사용할 tno 세션저장
+    @PostMapping("/pmanager")
+    @ResponseBody
+    public boolean tnosesstion(HttpServletRequest request, @RequestParam("tno") int tno){
+        try {
+            request.setCharacterEncoding("UTF-8");
+            request.getSession().setAttribute("tno", tno);
+            return true;
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return false;
     }
 
     // 시험지정보 등록처리
@@ -59,6 +80,19 @@ public class AdminController {
             response.getWriter().print(examService.getexamlist(dno));
         }catch (Exception e){
             System.out.println(e);
+        }
+    }
+
+    //시험정보 하나만 가져오기
+    @PostMapping("/getinfo")
+    public void getinfo(HttpServletResponse response, HttpServletRequest request){
+        try {
+            int tno = Integer.parseInt(request.getSession().getAttribute("tno").toString());
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("application/json");
+            response.getWriter().print(examService.getinfo(tno));
+        }catch (Exception e) {
+
         }
     }
 }

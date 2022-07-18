@@ -96,5 +96,19 @@ public class ExamService {
 
         return jsonArray;
     }
+    
+    //시험지정보 한개가져와서 리턴
+    public JSONObject getinfo(int tno){
+        TestinformationEntity testinformation = testinformationRepository.findById(tno).get();
+
+        JSONObject object = new JSONObject();
+        object.put("tno", testinformation.getTno());
+        object.put("tname", testinformation.getTname());
+        object.put("tyear", testinformation.getTyear());
+        object.put("tquarter", testinformation.getTquarter());
+        object.put("pcount", testinformation.getProblemEntityList().size());
+
+        return object;
+    }
 
 }
