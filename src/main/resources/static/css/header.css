@@ -1,10 +1,39 @@
-
-.menu_cen{
-    margin-left: 5px;
-    margin-right: 5px;
+@font-face {
+    font-family: 'HallymGothic-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2204@1.0/HallymGothic-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
 }
 
-.header_cen{
-    height: 50px;
-    background-image: url("/img/bmain.png");
+body{
+    font-family: 'HallymGothic-Regular';
+    padding-top: 75px;
 }
+
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 75px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.searchimg{ /* 검색 이미지 */
+    width: 35px;
+}
+.searchimg:hover{
+    width: 37px;
+}
+
+.header_ul{ /* 메뉴 ul */
+    margin-right: 30px;
+}
+
+
+
+
+
