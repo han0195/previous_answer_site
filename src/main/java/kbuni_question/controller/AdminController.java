@@ -1,6 +1,7 @@
 package kbuni_question.controller;
 
 import kbuni_question.dto.ExamDto;
+import kbuni_question.dto.ProblemDto;
 import kbuni_question.service.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -94,5 +95,31 @@ public class AdminController {
         }catch (Exception e) {
 
         }
+    }
+    
+    // 문제저장
+    @PostMapping("/saveproblem")
+    @ResponseBody
+    public boolean saveproblem(HttpServletResponse response, HttpServletRequest request, ProblemDto problemDto){
+
+        System.out.println(problemDto.toString());
+
+        int tno = Integer.parseInt(request.getSession().getAttribute("tno").toString());
+        return examService.saveproblem(problemDto, tno);
+    }
+
+    @DeleteMapping("/pdelete")
+    @ResponseBody
+    // 문제삭제
+    public boolean pdelete(@RequestParam("pno") int pno){
+        return examService.pdelete(pno);
+    }
+
+    // 문제수정
+    @PostMapping("/setproblem")
+    @ResponseBody
+    public boolean setproblem(ProblemDto problemDto) {
+        System.out.println(problemDto);
+        return examService.setproblem(problemDto);
     }
 }

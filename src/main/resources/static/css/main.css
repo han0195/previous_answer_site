@@ -1,7 +1,7 @@
 
 .first_div{
     height: 60vh;
-    background-color: #334557;
+    background: linear-gradient(45deg, Violet, Orange);
     padding: 80px 60px;
 }
 .first_div_img{

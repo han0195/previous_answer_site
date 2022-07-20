@@ -24,7 +24,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .ignoringAntMatchers("/admin/saveinfo")
                 .ignoringAntMatchers("/admin/pmanager")
-                .ignoringAntMatchers("/admin/getinfo");
+                .ignoringAntMatchers("/admin/getinfo")
+                .ignoringAntMatchers("/admin/saveproblem")
+                .ignoringAntMatchers("/exam/getproblemlist")
+                .ignoringAntMatchers("/admin/pdelete")
+                .ignoringAntMatchers("/exam/getproblem")
+                .ignoringAntMatchers("/admin/setproblem");
 
     }
 

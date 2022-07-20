@@ -51,7 +51,6 @@ function getexaminfolist(dno){
 }
 
 function pmanager(tno){
-    alert(tno);
     $.ajax({
         url:'/admin/pmanager',
         type: "POST",
