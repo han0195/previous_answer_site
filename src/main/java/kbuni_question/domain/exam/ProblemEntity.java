@@ -20,6 +20,7 @@ public class ProblemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int pno;
+    private int pindex;
     private String panswer;
     private String pname;
     private String poption;
@@ -31,7 +32,6 @@ public class ProblemEntity {
     @OneToMany(mappedBy = "problemEntity", cascade = CascadeType.ALL)
     @Builder.Default
     private List<ReplyEntity> replyEntityList = new ArrayList<>();
-
 
     @OneToMany(mappedBy = "problemEntity", cascade = CascadeType.ALL)
     @Builder.Default

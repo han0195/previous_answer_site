@@ -15,7 +15,7 @@ public class ImgEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int imgno;
-    private int imgurl;
+    private String imgurl;
 
     @ManyToOne
     @JoinColumn(name = "pno")

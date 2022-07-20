@@ -15,59 +15,130 @@
 
     <div>
         <h3>문제</h3>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> 문제 추가 </button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"> 문제 추가
+        </button>
+        <input id="hiddenbtn" type="hidden" data-bs-toggle="modal" data-bs-target="#exampleModal2">
     </div>
 
-    <div><!-- 문제리스트 출력창 -->
-    </div>
+    <div id="problemlistdiv"><!-- 문제리스트 출력창 -->
 
-    <!-- Modal -->
-    <div class="modal fade modal-dialog modal-dialog-centered modal-dialog-scrollable" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">문제추가</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">문제추가</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-control" id="pinfodata" name="pinfodata">
+
                     <div class="row">
                         <div class="col-sm-3">문제제목</div>
-                        <div class="col-sm-9"><input type="text" class="form-control"></div>
+                        <div class="col-sm-9"><input id="pname" name="pname" type="text" class="form-control"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            문제 인덱스
+                        </div>
+                        <div class="col-sm-9">
+                            <input id="pindex" name="pindex" type="text" class="form-control">
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-3">
                             이미지
                         </div>
                         <div class="col-sm-9">
-                            <input type="file" class="form-control" multiple>
+                            <input id="pimg" name="pimg" type="file" class="form-control">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-3">문제보기</div>
                         <div class="col-sm-9">
-                            <input class="form-control" type="text">
+                            <input id="poption" name="poption" class="form-control" type="text">
                             <span>"_로 문제보기를 구분해주세요"</span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-3">문제정답</div>
                         <div class="col-sm-9">
-                            <input class="form-control" type="text">
+                            <input id="panswer" name="panswer" class="form-control" type="text">
                             <span> 중복문제일 경우 , 로 구분해주세요</span>
                         </div>
                     </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="addtest()">문제추가</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
-                </div>
+
+<!-- 수정 -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel2">수정</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-control" id="pinfodata2" name="pinfodata">
+
+                    <div class="row">
+                        <div class="col-sm-3">문제제목</div>
+                        <div class="col-sm-9"><input id="pname2" name="pname" type="text" class="form-control"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            문제 인덱스
+                        </div>
+                        <div class="col-sm-9">
+                            <input id="pindex2" name="pindex" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            이미지
+                        </div>
+                        <div class="col-sm-9">
+                            <input id="pimg2" name="pimg" type="file" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">문제보기</div>
+                        <div class="col-sm-9">
+                            <input id="poption2" name="poption" class="form-control" type="text">
+                            <span>"_로 문제보기를 구분해주세요"</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">문제정답</div>
+                        <div class="col-sm-9">
+                            <input id="panswer2" name="panswer" class="form-control" type="text">
+                            <span> 중복문제일 경우 , 로 구분해주세요</span>
+                            <input id="hiddenpno" name="pno" type="hidden">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="setproblem()">수정</button>
             </div>
         </div>
     </div>
 </div>
 
 <div th:replace="footer.html::footer"></div>
+<!-- 사용자 지정 -->
 <script src="/js/exammanager.js"></script>
 </body>
 </html>
