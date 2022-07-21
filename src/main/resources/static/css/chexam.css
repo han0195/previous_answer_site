@@ -1,0 +1,11 @@
+
+
+.topview{
+    background-color: #6f42c1;
+}
+
+/* 마우스 hover 애니메이션 */
+.divhover:hover{
+    transform: scale(1.1);
+    transition: .5s;
+}

@@ -3,6 +3,8 @@ package kbuni_question.controller;
 import kbuni_question.dto.ExamDto;
 import kbuni_question.dto.ProblemDto;
 import kbuni_question.service.ExamService;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -60,7 +62,7 @@ public class AdminController {
     //학과 리스트 가져오기 처리
     @GetMapping("/getdlist")
     @ResponseBody
-    public void getdlist(HttpServletResponse response){
+    public void getdlist(HttpServletResponse response, HttpServletRequest request){
         try {
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json");
