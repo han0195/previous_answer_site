@@ -29,7 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .ignoringAntMatchers("/exam/getproblemlist")
                 .ignoringAntMatchers("/admin/pdelete")
                 .ignoringAntMatchers("/exam/getproblem")
-                .ignoringAntMatchers("/admin/setproblem");
+                .ignoringAntMatchers("/admin/setproblem")
+                .ignoringAntMatchers("/exam/beforestart");
 
     }
 

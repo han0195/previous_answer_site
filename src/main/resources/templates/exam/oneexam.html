@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/oneexam.css">
+</head>
+<body>
+
+<div th:replace="header.html::header"></div>
+
+<div class="container">
+
+    <div class="bigtitle border-bottom border-2 border-light "> <h3>컴퓨터이해 | 2019년 | 1학기기말고사</h3> </div>
+
+    <div id="problemdiv">
+        <div id="titlediv">1. 해당문제는 테스트문제입니다.</div>
+        <div id="imgdiv"> <img src="/testimg/b20e9441-adc8-431f-ba5f-1aa9801b0be9"> </div>
+        <ul id="chul">
+            <li>① 보기</li>
+            <li>② 보기</li>
+            <li>③ 보기</li>
+            <li>④ 보기</li>
+        </ul>
+    </div>
+
+    <div class="pageingdiv">
+
+        <button class="btn btn-secondary">&laquo;</button>
+
+        <span> 1 / 25 </span>
+
+        <button class="btn btn-secondary">&raquo;</button>
+
+    </div>
+
+
+</div>
+
+<div th:replace="footer.html::footer"></div>
+
+</body>
+</html>
