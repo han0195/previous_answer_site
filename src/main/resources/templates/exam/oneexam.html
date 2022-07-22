@@ -9,33 +9,38 @@
 
 <div class="container">
 
-    <div class="bigtitle border-bottom border-2 border-light "> <h3>컴퓨터이해 | 2019년 | 1학기기말고사</h3> </div>
+    <div class="bigtitle border-bottom border-2 border-light "> <h3>준비중</h3> </div>
+    <!-- 시험지 -->
+
+    <div id="alertdiv"></div>
 
     <div id="problemdiv">
-        <div id="titlediv">1. 해당문제는 테스트문제입니다.</div>
-        <div id="imgdiv"> <img src="/testimg/b20e9441-adc8-431f-ba5f-1aa9801b0be9"> </div>
-        <ul id="chul">
-            <li>① 보기</li>
-            <li>② 보기</li>
-            <li>③ 보기</li>
-            <li>④ 보기</li>
+        <div class="titlediv">1. 해당문제는 테스트문제입니다.</div>
+        <div class="imgdiv"> <img src="/testimg/b20e9441-adc8-431f-ba5f-1aa9801b0be9"> </div>
+        <ul class="chul">
+            <li><span id="prochick1" onclick="problemviewchick(1, 1)">①</span> 보기</li>
+            <li><span id="prochick2" onclick="problemviewchick(2, 1)">②</span> 보기</li>
+            <li><span id="prochick3" onclick="problemviewchick(3, 1)">③</span> 보기</li>
+            <li><span id="prochick4" onclick="problemviewchick(4, 1)">④</span> 보기</li>
         </ul>
     </div>
 
+    <div id="anwerdiv"> <button id="anwserbtn" class="btn btn-secondary" onclick="grading()">정답확인</button></div>
+
     <div class="pageingdiv">
+        <button onclick="laquo()" class="btn btn-secondary">&laquo;</button>
 
-        <button class="btn btn-secondary">&laquo;</button>
+        <span id="pageing"> 1 / 25 </span>
 
-        <span> 1 / 25 </span>
-
-        <button class="btn btn-secondary">&raquo;</button>
-
+        <button onclick="raquo()" class="btn btn-secondary">&raquo;</button>
     </div>
-
 
 </div>
 
 <div th:replace="footer.html::footer"></div>
+
+<!-- 사용자지정 js -->
+<script src="/js/oneexam.js"></script>
 
 </body>
 </html>
