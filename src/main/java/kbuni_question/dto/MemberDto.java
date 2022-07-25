@@ -1,6 +1,7 @@
 package kbuni_question.dto;
 
 import kbuni_question.domain.member.MemberEntity;
+import kbuni_question.domain.member.Role;
 import lombok.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -29,6 +30,7 @@ public class MemberDto {
                 .mpassword(passwordEncoder.encode(this.mpassword))
                 .mname(this.mname)
                 .findpwkey(this.findpwkey)
+                .role(Role.MEMBER)
                 .build();
 
     }
