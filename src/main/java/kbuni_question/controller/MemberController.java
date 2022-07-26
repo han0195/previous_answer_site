@@ -13,6 +13,11 @@ public class MemberController {
     @Autowired
     MemberService memberService;
 
+    @GetMapping("/login")
+    public String login(){
+        return "/member/login";
+    }
+
     /* 회원 가입 페이지 이동 */
     @GetMapping("/singup")
     public String movesignup(){

@@ -35,7 +35,7 @@ $(document).ready(function(){
         let mname = $("#inputAddress").val();
         let mnamere = /^[A-Za-z0-9가-힣]{2,15}$/;
         if(mnamere.test(mname)){
-            $ajax({
+            $.ajax({
                 url : "/member/selectmname",
                 data: {"mname" : mname},
                 type: "POST",
@@ -49,6 +49,7 @@ $(document).ready(function(){
                 }
             })
         }else{
+            console.log("s");
             let html = "2~15자리이상입력해주세요";
             $("#mnamespan").html(html);
         }
