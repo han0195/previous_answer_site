@@ -1,5 +1,6 @@
 
 
+
 function login(){
     let mid = $("#mid").val();
     let mpassword = $("#mpassword").val();
@@ -7,8 +8,9 @@ function login(){
     $.ajax({
         url: "/member/logincontroller",
         data: {"mid" : mid, "mpassword" : mpassword},
+        type: "POST",
         success : function (re) {
-            console.log(re);
+
         }
     })
 }

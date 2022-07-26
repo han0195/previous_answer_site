@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -27,7 +28,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("mpassword")
                 .failureUrl("/member/login/error")
                 .and()
+                .logout()
+                .logoutRequestMatcher( new AntPathRequestMatcher("/member/logout")) // 로그인 처리할 URL 정의
+                .logoutSuccessUrl("/") // 로그인 성공시
+                .invalidateHttpSession( true ) // 세션 초기화
+                .and()
                 .csrf()
+                .ignoringAntMatchers("/member/logincontroller") // 로그인
                 .ignoringAntMatchers("/admin/saveinfo")
                 .ignoringAntMatchers("/admin/pmanager")
                 .ignoringAntMatchers("/admin/getinfo")
@@ -38,7 +45,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .ignoringAntMatchers("/admin/setproblem")
                 .ignoringAntMatchers("/exam/beforestart")
                 .ignoringAntMatchers("/member/singup")
-                .ignoringAntMatchers("/member/selectmname");
+                .ignoringAntMatchers("/member/selectmname")
+                .and()
+                .exceptionHandling() // 오류페이지 발생시 시큐리티 페이지 전환
+                .accessDeniedPage("/error");
 
     }
 

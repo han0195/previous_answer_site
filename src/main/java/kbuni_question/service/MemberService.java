@@ -22,16 +22,15 @@ public class MemberService implements UserDetailsService {
     @Autowired
     MemberRepository memberRepository;
     
-    //로그인
+    //로그인 서비스
     @Override
     public UserDetails loadUserByUsername(String mid) throws UsernameNotFoundException {
         // 1. 회원 아이디로 엔티티 찾기
         Optional<MemberEntity> entityOptional =  memberRepository.findBymid( mid );
         MemberEntity memberEntity = entityOptional.orElse(null);
-        System.out.println("gd");
-        System.out.println(memberEntity);
-        return new LoginDto(  memberEntity ,
+        LoginDto loginDto =new LoginDto(  memberEntity ,
                 Collections.singleton(new SimpleGrantedAuthority(memberEntity.getrolekey())) );
+        return loginDto;
     }
 
     /* 회원가입 처리 */
