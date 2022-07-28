@@ -73,7 +73,7 @@ function getproblemlist(){
                         if(re[count].pimg.length == 0){ /* 사진이 존재하지않는다면 */
 
                        }else {
-                           html += '<div><img src="/testimg/'+re[count].pimg[0]+'"></div>';
+                           html += '<div><img width="50%" src="/examimg/'+re[count].pimg[0]+'"></div>';
                        }
                         html += '<ul>';
                         for(let z = 0; z < re[count].poption.length ; z++){ /* 문제보기 반복 */

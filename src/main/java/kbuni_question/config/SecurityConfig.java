@@ -30,11 +30,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutRequestMatcher( new AntPathRequestMatcher("/member/logout")) // 로그인 처리할 URL 정의
-                .logoutSuccessUrl("/") // 로그인 성공시
+                .logoutSuccessUrl("/")
                 .invalidateHttpSession( true ) // 세션 초기화
                 .and()
                 .csrf()
                 .ignoringAntMatchers("/member/logincontroller") // 로그인
+                .ignoringAntMatchers("/member/login")
                 .ignoringAntMatchers("/admin/saveinfo")
                 .ignoringAntMatchers("/admin/pmanager")
                 .ignoringAntMatchers("/admin/getinfo")

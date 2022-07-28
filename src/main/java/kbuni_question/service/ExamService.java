@@ -123,8 +123,16 @@ public class ExamService {
         // pk값 test 가져오기
         TestinformationEntity testinformation = testinformationRepository.findById(tno).get();
 
+        // 문제 옵션 치환
+        problemDto.setPoption(problemDto.getPoption().replace("①",""));
+        problemDto.setPoption(problemDto.getPoption().replace("②","_"));
+        problemDto.setPoption(problemDto.getPoption().replace("③","_"));
+        problemDto.setPoption(problemDto.getPoption().replace("④","_"));
+
+
         // problem 저장
         ProblemEntity problemEntity = problemDto.toentity();
+        System.out.println(problemEntity.getPoption());
         problemRepository.save(problemEntity);
 
         // pk fk 연결
@@ -141,7 +149,7 @@ public class ExamService {
                 uuidfile = uuid.toString();
 
                 // 2. 경로 설정
-                String dir = "C:\\Users\\504\\IdeaProjects\\previous_answer_site\\src\\main\\resources\\static\\testimg\\";
+                String dir = "C:\\Users\\gks01\\git\\previous_answer_site\\src\\main\\resources\\static\\examimg\\";
                 String filepath = dir+uuidfile;
 
                 try {

@@ -172,12 +172,12 @@ function inserthtml(){
     if(testdata[viewcount].pimg.length == 0){ /* 사진이 존재하지않는다면 */
         html += '<div></div>'
     }else {
-        html += '<div><img src="/testimg/'+testdata[viewcount].pimg[0]+'"></div>';
+        html += '<div><img width="100%" src="/examimg/'+testdata[viewcount].pimg[0]+'"></div>';
     }
     html += '<ul class="chul">';
     let anwser = testdata[viewcount].panswer.split(",");
     if(anwser.length > 1){
-        html += '<li><span id="prochick1" onclick="problemviewchick(1, 1)">①</span> '+testdata[viewcount].poption[0]+'</li>';
+        html += '<li><span id="prochick1" onclick="problemviewchick(1, 1);">①</span> '+testdata[viewcount].poption[0]+'</li>';
         html += '<li><span id="prochick2" onclick="problemviewchick(2, 1)">②</span> '+testdata[viewcount].poption[1]+'</li>';
         html += '<li><span id="prochick3" onclick="problemviewchick(3, 1)">③</span> '+testdata[viewcount].poption[2]+'</li>';
         html += '<li><span id="prochick4" onclick="problemviewchick(4, 1)">④</span> '+testdata[viewcount].poption[3]+'</li>';

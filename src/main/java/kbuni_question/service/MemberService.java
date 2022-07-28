@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Member;
 import java.util.Collections;
 import java.util.Optional;
@@ -19,8 +20,7 @@ import java.util.Optional;
 @Service
 public class MemberService implements UserDetailsService {
 
-    @Autowired
-    MemberRepository memberRepository;
+
     
     //로그인 서비스
     @Override
@@ -32,6 +32,12 @@ public class MemberService implements UserDetailsService {
                 Collections.singleton(new SimpleGrantedAuthority(memberEntity.getrolekey())) );
         return loginDto;
     }
+
+    @Autowired
+    MemberRepository memberRepository;
+
+    @Autowired
+    HttpServletRequest request; // 세션 사용을 위한 request 객체 선언
 
     /* 회원가입 처리 */
     @Transactional
@@ -53,7 +59,6 @@ public class MemberService implements UserDetailsService {
             System.out.println("존재");
             return true;
         }
-
     }
 
 
