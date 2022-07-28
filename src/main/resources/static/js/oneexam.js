@@ -172,7 +172,7 @@ function inserthtml(){
     if(testdata[viewcount].pimg.length == 0){ /* 사진이 존재하지않는다면 */
         html += '<div></div>'
     }else {
-        html += '<div><img width="100%" src="/examimg/'+testdata[viewcount].pimg[0]+'"></div>';
+        html += '<div><img width="50%" src="/examimg/'+testdata[viewcount].pimg[0]+'"></div>';
     }
     html += '<ul class="chul">';
     let anwser = testdata[viewcount].panswer.split(",");

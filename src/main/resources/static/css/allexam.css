@@ -1,0 +1,9 @@
+.chul{ /* 보기 div */
+    list-style: none;
+    padding-left: 0px;
+}
+
+.bigtitle{/* 시험지 정보 */
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

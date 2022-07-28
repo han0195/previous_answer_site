@@ -23,10 +23,16 @@ public class ExamController {
         request.getSession().setAttribute("chmode", chmode);
         return "/exam/chexam";
     }
-
+    // 한문제씩 풀기 페이지 이동
     @GetMapping("/oneexam")
     public String monveonexam(){
         return "/exam/oneexam";
+    }
+
+    // 모두풀기 페이지 이동
+    @GetMapping("/allexam")
+    public String moveallexam(){
+        return "/exam/allexam";
     }
 
     @PostMapping("/getproblemlist")
@@ -64,12 +70,11 @@ public class ExamController {
             int chmode = Integer.parseInt(request.getSession().getAttribute("chmode").toString());
             // test 번호 세션저장
             request.getSession().setAttribute("tno", tno);
-
+            response.setCharacterEncoding("UTF-8");
             if(chmode == 1){ /* 한문제씩 푸는 모드라면*/
-                response.setCharacterEncoding("UTF-8");
                 response.getWriter().print("/exam/oneexam");
             }else if(chmode == 2){ /* 모아풀기 모드라면 */
-
+                response.getWriter().print("/exam/allexam");
             }else { /* 실전연습 모드라면 */
 
             }
