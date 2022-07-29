@@ -3,9 +3,12 @@
 let indexproblem = ['①', '②', '③', '④' , '⑤'];
 //선택 보기
 let chindex = '●';
-
 /*문제 리스트 저장*/
 let testdata;
+
+// 답 저장 배열
+let user_choice_anwser = [];
+
 
 /* 문제 리스트 가져오기 함수 호출 */
 gettest();
@@ -42,7 +45,11 @@ function inserthtml(){
                 }
                 html += '<ul class="chul">';
                 for(let z = 0; z < testdata[count].poption.length ; z++){ /* 문제보기 반복 */
-                    html += '<li><span id="">'+indexproblem[z]+'</span>'+testdata[count].poption[z]+'</li>';
+                    if(testdata[count].poption.length > 1){ /* 중복 답*/
+                        html += '<li><span onclick="choice(z, testdata[count].pno, true)">'+indexproblem[z]+'</span>'+testdata[count].poption[z]+'</li>';
+                    }else{ /* 단일 답 */
+                        html += '<li><span onclick="choice(z, testdata[count].pno, false)">'+indexproblem[z]+'</span>'+testdata[count].poption[z]+'</li>';
+                    }
                 }
                 html += '</ul>';
                 html += '</div>';
@@ -53,4 +60,15 @@ function inserthtml(){
 
     }
     $("#problemdiv").html(html);
+}
+
+// 답 선택
+function choice(choicenum, pno, duplicate_selection){
+
+    if(duplicate_selection){ /* 중복선택 문제 */
+
+    }else{ /* 단일 선택 문제 */
+        user_choice_anwser.push([new Object("pno",pno), new Object("choicenum", choicenum)]);
+    }
+
 }
