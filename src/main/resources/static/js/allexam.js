@@ -45,10 +45,10 @@ function inserthtml(){
                 }
                 html += '<ul class="chul">';
                 for(let z = 0; z < testdata[count].poption.length ; z++){ /* 문제보기 반복 */
-                    if(testdata[count].poption.length > 1){ /* 중복 답*/
-                        html += '<li><span onclick="choice(z, testdata[count].pno, true)">'+indexproblem[z]+'</span>'+testdata[count].poption[z]+'</li>';
+                    if(testdata[count].panswer.length > 1){ /* 중복 답*/
+                        html += '<li><span onclick="choice('+(z + 1)+', '+testdata[count].pno+', '+true+')">'+indexproblem[z]+'</span>'+testdata[count].poption[z]+'</li>';
                     }else{ /* 단일 답 */
-                        html += '<li><span onclick="choice(z, testdata[count].pno, false)">'+indexproblem[z]+'</span>'+testdata[count].poption[z]+'</li>';
+                        html += '<li><span onclick="choice('+(z + 1)+', '+testdata[count].pno+', '+false+')">'+indexproblem[z]+'</span>'+testdata[count].poption[z]+'</li>';
                     }
                 }
                 html += '</ul>';
@@ -64,11 +64,35 @@ function inserthtml(){
 
 // 답 선택
 function choice(choicenum, pno, duplicate_selection){
-
+    alert(pno);
     if(duplicate_selection){ /* 중복선택 문제 */
-
+        // 답 저장 배열의 해당 문제번호가 존재하지는지 확인
+        let pass = true;
+        for(let i = 0 ; i < user_choice_anwser.length ; i++){
+            if(user_choice_anwser[i].pno == pno){ /* 선택한 답이 있다면 */
+                pass = false;
+                user_choice_anwser[i].choicenums.push(choicenum);
+                break;
+            }
+        }
+        // 선택하지않았다면
+        if(pass){
+            user_choice_anwser.push({"pno" : pno , "choicenums" : [choicenum]});
+        }
     }else{ /* 단일 선택 문제 */
-        user_choice_anwser.push([new Object("pno",pno), new Object("choicenum", choicenum)]);
+        // 답 저장 배열의 해당 문제번호가 존재하지는지 확인
+        let pass = true;
+        for(let i = 0 ; i < user_choice_anwser.length ; i++){
+            if(user_choice_anwser[i].pno == pno){ /* 선택한 답이 있다면 */
+                pass = false;
+                user_choice_anwser[i].choicenums = [choicenum];
+                break;
+            }
+        }
+        // 선택하지않았다면
+        if(pass){
+            user_choice_anwser.push({"pno" : pno , "choicenums" : [choicenum]});
+        }
     }
 
 }
