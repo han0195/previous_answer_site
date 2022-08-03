@@ -1,21 +1,42 @@
 
 .first_div{
     height: 60vh;
-    background: linear-gradient(45deg, Violet, Orange);
+  /*  background:  linear-gradient(360deg, #50C9C3 10%, #96DEDA 360%);*/
     padding: 80px 60px;
+    margin-top: -16px;
 }
+
 .first_div_img{
     height: 100%;
     background-image: url("/img/bmain.png");
     background-position: center center;
     padding: 30px;
+    border-radius: 40px 40px 40px 40px;
+}
+@media screen and (max-width:1024px){
+    .first_div{
+        padding: 40px 0px;
+    }
+}
+.img_container{
+    height: 100%;
 }
 .first_div_text{
     color: white;
     display: inline-block;
+    text-align: center;
     position: relative;
-    top: 10vh;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 .first_div_btn{
     margin-top: 20px;
+}
+
+.index_text{
+    color: #0d6efd;
+}
+.starta{
+    color: blue;
 }

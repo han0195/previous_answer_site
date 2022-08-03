@@ -15,11 +15,17 @@ header{
     top: 0;
     left: 0;
     right: 0;
-    height: 75px;
+    height: 4.5%;
     background-color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index:1;
+}
+@media screen and (max-width:762px){
+    header{
+        height: 7%;
+    }
 }
 
 .searchimg{ /* 검색 이미지 */
@@ -32,6 +38,8 @@ header{
 .header_ul{ /* 메뉴 ul */
     margin-right: 30px;
 }
+
+
 
 
 

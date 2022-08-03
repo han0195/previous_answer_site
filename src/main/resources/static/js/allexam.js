@@ -37,6 +37,7 @@ function inserthtml(){
         for(let j = 0 ; j < 2 ; j++){ /* 두개씩 출력 */
             if(testdata[count] != null){
                 html += ' <div class="col-sm-6">';
+                html += '<div id="gradingbox_'+testdata[count].pno+'"></div>';
                 html += '<div class="titlediv">'+testdata[count].pindex+". "+testdata[count].pname+' <a onclick="resetchoice('+testdata[count].pno+')">선택초기화</a></div>';
                 if(testdata[count].pimg.length == 0){ /* 사진이 존재하지않는다면 */
                     html += '<div></div>'
@@ -46,9 +47,9 @@ function inserthtml(){
                 html += '<ul class="chul">';
                 for(let z = 0; z < testdata[count].poption.length ; z++){ /* 문제보기 반복 */
                     if(testdata[count].panswer.length > 1){ /* 중복 답*/
-                        html += '<li><span id="problem'+z+'_'+testdata[count].pno+'" onclick="choice('+(z + 1)+', '+testdata[count].pno+', '+true+')">'+indexproblem[z]+'</span>'+testdata[count].poption[z]+'</li>';
+                        html += '<li><span id="problem'+z+'_'+testdata[count].pno+'" onclick="choice('+(z + 1)+', '+testdata[count].pno+', '+true+' , '+testdata[count].panswer+')">'+indexproblem[z]+'</span>'+testdata[count].poption[z]+'</li>';
                     }else{ /* 단일 답 */
-                        html += '<li><span id="problem'+z+'_'+testdata[count].pno+'" onclick="choice('+(z + 1)+', '+testdata[count].pno+', '+false+')">'+indexproblem[z]+'</span>'+testdata[count].poption[z]+'</li>';
+                        html += '<li><span id="problem'+z+'_'+testdata[count].pno+'" onclick="choice('+(z + 1)+', '+testdata[count].pno+', '+false+' , '+testdata[count].panswer+')">'+indexproblem[z]+'</span>'+testdata[count].poption[z]+'</li>';
                     }
                 }
                 html += '</ul>';
@@ -63,8 +64,7 @@ function inserthtml(){
 }
 
 // 답 선택
-function choice(choicenum, pno, duplicate_selection){
-    alert(pno);
+function choice(choicenum, pno, duplicate_selection, anwser){
     if(duplicate_selection){ /* 중복선택 문제 */
         // 답 저장 배열의 해당 문제번호가 존재하지는지 확인
         let pass = true;
@@ -77,7 +77,7 @@ function choice(choicenum, pno, duplicate_selection){
         }
         // 선택하지않았다면
         if(pass){
-            user_choice_anwser.push({"pno" : pno , "choicenums" : [choicenum]});
+            user_choice_anwser.push({"pno" : pno , "choicenums" : [choicenum] , "anwser" : anwser});
         }
     }else{ /* 단일 선택 문제 */
         // 답 저장 배열의 해당 문제번호가 존재하지는지 확인
@@ -91,7 +91,7 @@ function choice(choicenum, pno, duplicate_selection){
         }
         // 선택하지않았다면
         if(pass){
-            user_choice_anwser.push({"pno" : pno , "choicenums" : [choicenum]});
+            user_choice_anwser.push({"pno" : pno , "choicenums" : [choicenum] , "anwser" : anwser});
         }
     }
 
@@ -135,6 +135,38 @@ function resetchoice(pno){
 }
 
 //채점 함수
+function grading(){
+
+    let 맞은개수 = 0;
+
+    if(testdata.length == user_choice_anwser.length){
+
+        for(let i = 0 ; i < user_choice_anwser.length ; i++){
+
+           let answer = ['d'];
+
+           if(answer.length == 1){ /* 단일 */
+               if(user_choice_anwser[i].choicenums[0] == user_choice_anwser[i].anwser){
+                    맞은개수++;
+               }else{
+                   // box div 출력
+                   let html = '<div class="alert alert-danger" role="alert">' +
+                       ' 틀렸습니다. 답: '+user_choice_anwser[i].anwser+' '+
+                       '</div>'
+                   $('#gradingbox_'+user_choice_anwser[i].pno+'').html(html);
+               }
+           }else{ /* 중복 */
+
+           }
+
+
+        }
+
+    }else{
+        alert("풀이를 하지않은 문제가 있습니다.")
+    }
+
+}
 
 
 
