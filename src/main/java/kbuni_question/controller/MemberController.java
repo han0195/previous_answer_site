@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+
 @Controller
 @RequestMapping("/member")
 public class MemberController {
@@ -26,8 +28,17 @@ public class MemberController {
 
     /* 회원 가입 처리 */
     @PostMapping("/singup")
-    public boolean singup(MemberDto memberDto){
-        return memberService.singup(memberDto);
+    public void singup(MemberDto memberDto, HttpServletResponse response){
+        boolean pass = memberService.singup(memberDto);
+        try {
+            if(pass){
+                response.sendRedirect("/member/login");
+            }else{
+                response.sendRedirect("/error");
+            }
+        }catch (Exception e){
+            System.out.println("회원가입에러" + e);
+        }
     }
 
     /* 별명 중복체크 */

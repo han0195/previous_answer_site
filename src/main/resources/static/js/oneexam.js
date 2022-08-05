@@ -57,16 +57,13 @@ function problemviewchick(num, overlap){
             answer.push(4) /* 배열 값 넣기 */
         }
     }else{
-        if(count < 2){ /* 정답을 두개 선택하지 않았다면 */
+        if(count < 4){ /* 정답을 두개 선택하지 않았다면 */
             if(num == 1){
                 if($("#prochick1").html() == '●'){
                     $("#prochick1").html('①');
                     count--;
-                    if(answer.indexOf(1) == 0){
                         answer.splice(answer.indexOf(1),1);
-                    }else{
-                        answer.splice(answer.indexOf(1));
-                    }
+
                 }else {
                     $("#prochick1").html('●');
                     count++;
@@ -76,11 +73,7 @@ function problemviewchick(num, overlap){
                 if($("#prochick2").html() == '●'){
                     $("#prochick2").html('②');
                     count--;
-                    if(answer.indexOf(2) == 0){
-                        answer.splice(answer.indexOf(2),1);
-                    }else{
-                        answer.splice(answer.indexOf(2));
-                    }
+                    answer.splice(answer.indexOf(2),1);
                 }else {
                     $("#prochick2").html('●');
                     count++;
@@ -90,11 +83,8 @@ function problemviewchick(num, overlap){
                 if($("#prochick3").html() == '●'){
                     $("#prochick3").html('③');
                     count--;
-                    if(answer.indexOf(3) == 0){
-                        answer.splice(answer.indexOf(3),1);
-                    }else{
-                        answer.splice(answer.indexOf(3));
-                    }
+
+                    answer.splice(answer.indexOf(3),1);
                 }else {
                     $("#prochick3").html('●');
                     count++;
@@ -104,11 +94,7 @@ function problemviewchick(num, overlap){
                 if($("#prochick4").html() == '●'){
                     $("#prochick4").html('④');
                     count--;
-                    if(answer.indexOf(4) == 0){
-                        answer.splice(answer.indexOf(4),1);
-                    }else{
-                        answer.splice(answer.indexOf(4));
-                    }
+                    answer.splice(answer.indexOf(4),1);
                 }else {
                     $("#prochick4").html('●');
                     count++;
@@ -120,41 +106,25 @@ function problemviewchick(num, overlap){
                 if($("#prochick1").html() == '●') {
                     $("#prochick1").html('①');
                     count--;
-                    if(answer.indexOf(1) == 0){
-                        answer.splice(answer.indexOf(1),1);
-                    }else{
-                        answer.splice(answer.indexOf(1));
-                    }
+                    answer.splice(answer.indexOf(1),1);
                 }
             }else if(num == 2){
                 if($("#prochick2").html() == '●') {
                     $("#prochick2").html('②');
                     count--;
-                    if(answer.indexOf(2) == 0){
-                        answer.splice(answer.indexOf(2),1);
-                    }else{
-                        answer.splice(answer.indexOf(2));
-                    }
+                    answer.splice(answer.indexOf(2),1);
                 }
             }else if(num == 3){
                 if($("#prochick3").html() == '●') {
                     $("#prochick3").html('③');
                     count--;
-                    if(answer.indexOf(3) == 0){
-                        answer.splice(answer.indexOf(3),1);
-                    }else{
-                        answer.splice(answer.indexOf(3));
-                    }
+                    answer.splice(answer.indexOf(3),1);
                 }
             }else{
                 if($("#prochick4").html() == '●') {
                     $("#prochick4").html('④');
                     count--;
-                    if(answer.indexOf(4) == 0){
-                        answer.splice(answer.indexOf(4),1);
-                    }else{
-                        answer.splice(answer.indexOf(4));
-                    }
+                    answer.splice(answer.indexOf(4),1);
                 }
             }
         }
@@ -175,7 +145,7 @@ function inserthtml(){
         html += '<div><img width="50%" src="/examimg/'+testdata[viewcount].pimg[0]+'"></div>';
     }
     html += '<ul class="chul">';
-    let anwser = testdata[viewcount].panswer.split(",");
+    let anwser = testdata[viewcount].panswer.split("_");
     if(anwser.length > 1){
         html += '<li><span id="prochick1" onclick="problemviewchick(1, 1);">①</span> '+testdata[viewcount].poption[0]+'</li>';
         html += '<li><span id="prochick2" onclick="problemviewchick(2, 1)">②</span> '+testdata[viewcount].poption[1]+'</li>';
@@ -210,24 +180,25 @@ function grading(){
     }
 
     // 채점
-    let answerte = testdata[viewcount].panswer.split(",");
+    let answerte = testdata[viewcount].panswer.split("_");
     let answercount = answer.length;
     let html = "";
-    if(answercount > 1){/* 만약 복수 정답이면*/
+    if(answerte.length > 1){/* 만약 복수 정답이면*/
         let pass = [];
         for(let i = 0; i < answercount ; i++){
-            if(answer.indexOf(answerte[i]) != -1){ /* 정답이면 */
+            if(answer.indexOf(parseInt(answerte[i])) != -1){ /* 정답이면 */
                 pass.push(true);
             }else{
                 pass.push(false);
             }
         }
-        if(pass.indexOf(false)){ /* 오답 */
+        console.log(pass);
+        if(pass.indexOf(false) != -1){ /* 오답 */
             html += '<div class="alert alert-danger" role="alert">';
             html += '틀렸습니다. 정답은: ';
-            for(let j = 0 ; j > testdata[viewcount].panswer.length; j++){
-                html += ''+testdata[viewcount].panswer[j]+'';
-            }
+            console.log(testdata[viewcount].panswer);
+            let temptext = testdata[viewcount].panswer.replace('_', ',')
+            html += ''+temptext+'';
             html += '</div>';
         }else { /* 정답 */
             html += '<div class="alert alert-success" role="alert">';

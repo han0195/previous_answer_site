@@ -49,7 +49,6 @@ $(document).ready(function(){
                 }
             })
         }else{
-            console.log("s");
             let html = "2~15자리이상입력해주세요";
             $("#mnamespan").html(html);
         }
@@ -73,7 +72,7 @@ function signup(){
             processData: false,
             success : function (re){
                if(re){ /* 회원가입 성공 */
-                   location.href = "/";
+                   location.href = "/member/login";
                }else{ /* 회원가입 실패 */
                    alert("서비스 에러");
                }

@@ -48,8 +48,7 @@ function inserthtml(){
                 for(let z = 0; z < testdata[count].poption.length ; z++){ /* 문제보기 반복 */
                     if(testdata[count].panswer.length > 1){ /* 중복 답*/
                         let tempan = testdata[count].panswer;
-                        html += '<li><span id="problem'+z+'_'+testdata[count].pno+'" onclick="choice('+(z + 1)+', '+testdata[count].pno+', '+true+', '+tempan+')">'+indexproblem[z]+'</span>'+testdata[count].poption[z]+'</li>';
-                        alert(testdata[count].panswer);
+                        html += '<li><span id="problem'+z+'_'+testdata[count].pno+'" onclick="choice('+(z + 1)+', '+testdata[count].pno+', '+true+', \''+tempan+'\')">'+indexproblem[z]+'</span>'+testdata[count].poption[z]+'</li>';
                     }else{ /* 단일 답 */
                         html += '<li><span id="problem'+z+'_'+testdata[count].pno+'" onclick="choice('+(z + 1)+', '+testdata[count].pno+', '+false+' , '+testdata[count].panswer+')">'+indexproblem[z]+'</span>'+testdata[count].poption[z]+'</li>';
                     }
@@ -67,7 +66,6 @@ function inserthtml(){
 
 // 답 선택
 function choice(choicenum, pno, duplicate_selection, anwser){
-    alert(anwser);
     if(duplicate_selection){ /* 중복선택 문제 */
         // 답 저장 배열의 해당 문제번호가 존재하지는지 확인
         let pass = true;
@@ -78,7 +76,6 @@ function choice(choicenum, pno, duplicate_selection, anwser){
                 break;
             }
         }
-        alert(anwser);
         // 선택하지않았다면
         if(pass){
             user_choice_anwser.push({"pno" : pno , "choicenums" : [choicenum] , "anwser" : anwser});
@@ -147,15 +144,17 @@ function grading(){
 
         for(let i = 0 ; i < user_choice_anwser.length ; i++){
             let answer = [];
-            if(user_choice_anwser[i].anwser.toString().indexOf(",") != -1){ /* 답이 1개 이상이면 */
-                answer = user_choice_anwser[i].anwser.split(",");
+            if(user_choice_anwser[i].anwser.toString().indexOf("_") != -1){ /* 답이 1개 이상이면 */
+                answer = user_choice_anwser[i].anwser.split("_");
             }else{
-                answer = user_choice_anwser[i].anwser
+                answer.push(user_choice_anwser[i].anwser);
             }
-
            if(answer.length == 1){ /* 단일 */
-               alert("dsf");
                if(user_choice_anwser[i].choicenums[0] == user_choice_anwser[i].anwser){
+                   let html = '<div class="alert alert-success" role="alert">' +
+                       '정답'+
+                       '</div>'
+                   $('#gradingbox_'+user_choice_anwser[i].pno+'').html(html);
                    answercount++;
                }else{
                    // box div 출력
@@ -177,18 +176,24 @@ function grading(){
                    }
 
                    if(pass){ /* 틀림 */
+                       let temptext = user_choice_anwser[i].anwser.replace('_',',')
                        let html = '<div class="alert alert-danger" role="alert">' +
-                           ' 틀렸습니다. 답: '+user_choice_anwser[i].anwser+' '+
+                           ' 틀렸습니다. 답: '+temptext+' '+
                            '</div>'
                        $('#gradingbox_'+user_choice_anwser[i].pno+'').html(html);
                    }else {
+                       let html = '<div class="alert alert-success" role="alert">' +
+                           '정답'+
+                           '</div>'
+                       $('#gradingbox_'+user_choice_anwser[i].pno+'').html(html);
                        answercount++;
                    }
 
                }else{
                    // box div 출력
+                   let temptext = user_choice_anwser[i].anwser.replace('_',',')
                    let html = '<div class="alert alert-danger" role="alert">' +
-                       ' 틀렸습니다. 답: '+user_choice_anwser[i].anwser+' '+
+                       ' 틀렸습니다. 답: '+temptext+' '+
                        '</div>'
                    $('#gradingbox_'+user_choice_anwser[i].pno+'').html(html);
                }
@@ -196,16 +201,18 @@ function grading(){
 
 
         }
+        let html = '<div class="alert alert-info" role="alert">' +
+            ' 당신은 '+testdata.length+'/'+answercount+' 맞았습니다.'+
+            '</div>'
 
+        $("#anwserinfo").html(html);
     }else{
-        alert("풀이를 하지않은 문제가 있습니다.")
+        let html = '<div class="alert alert-warning" role="alert">' +
+            ' 풀이를 하지않은 문제가 있습니다'+
+            '</div>'
+
+        $("#anwserinfo").html(html);
     }
-
-    let html = '<div class="alert alert-danger" role="alert">' +
-        ' 당신은 '+testdata.length+'/'+answercount+' 맞았습니다.'+
-        '</div>'
-
-    $("#anwserinfo").html(html);
 
 }
 
