@@ -1,5 +1,6 @@
 package kbuni_question.domain.member;
 
+import kbuni_question.domain.board.ErrorboardEntity;
 import kbuni_question.domain.board.ReplyEntity;
 import lombok.*;
 
@@ -32,6 +33,10 @@ public class MemberEntity {
     @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL)
     @Builder.Default
     private List<ReplyEntity> replyEntityList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL)
+    @Builder.Default
+    private List<ErrorboardEntity> errorboardEntityList = new ArrayList<>();
 
 
 

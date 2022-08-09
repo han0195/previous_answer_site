@@ -31,6 +31,9 @@ public class ExamService {
     @Autowired
     ProblemRepository problemRepository;
 
+    @Autowired
+    ImgRepository imgRepository;
+
     @Transactional
     public boolean saveexaminfo(ExamDto examDto) {
 
@@ -215,7 +218,19 @@ public class ExamService {
 
     // 문제삭제
     public boolean pdelete(int pno) {
+
+        Optional<ImgEntity> imgEntity = imgRepository.findbypno(pno);
+        if(imgEntity.isPresent()){
+            ImgEntity entity = imgEntity.get();
+            //이미지 삭제
+            File file = new File("C:\\Users\\gks01\\git\\previous_answer_site\\src\\main\\resources\\static\\examimg\\"+entity.getImgurl());
+            file.delete();
+        }else{
+
+        }
+
         problemRepository.deleteById(pno);
+
         return true;
     }
 
@@ -267,6 +282,19 @@ public class ExamService {
         /* 이미지 보류 */
 
         return true;
+
+    }
+
+    // 문제 제목가져오기 서비스
+    public JSONObject gettitle(int tno){
+        JSONObject object = new JSONObject();
+
+        TestinformationEntity entity = testinformationRepository.findById(tno).get();
+
+        object.put("tname", entity.getTname() +" | "+ entity.getTquarter() +" | "+ entity.getTyear());
+
+        System.out.println("확인: " +  entity.getTname());
+        return object;
 
     }
 

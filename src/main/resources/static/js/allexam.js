@@ -12,6 +12,19 @@ let user_choice_anwser = [];
 
 /* 문제 리스트 가져오기 함수 호출 */
 gettest();
+gettitle();
+
+/* 시험지 제목 가져오기 함수*/
+function gettitle(){
+    $.ajax({
+        url: "/exam/gettitle",
+        success : function (re){
+            console.log(re.tname);
+            $("#btitle").html(re.tname);
+        }
+    })
+}
+
 
 /* 문제 리스트 가져오기 */
 function gettest(){

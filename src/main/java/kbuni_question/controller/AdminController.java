@@ -1,11 +1,19 @@
 package kbuni_question.controller;
 
+import kbuni_question.domain.board.ErrorboardEntity;
+import kbuni_question.dto.ErrorDto;
 import kbuni_question.dto.ExamDto;
+import kbuni_question.dto.LoginDto;
 import kbuni_question.dto.ProblemDto;
 import kbuni_question.service.ExamService;
+import kbuni_question.service.MemberService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy;
+import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
+import org.springframework.security.web.session.ConcurrentSessionFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +26,10 @@ public class AdminController {
 
     @Autowired
     ExamService examService;
+
+    @Autowired
+    MemberService memberService;
+
 
     //어드민 메인페이지 이동
     @GetMapping("/main")
@@ -121,7 +133,27 @@ public class AdminController {
     @PostMapping("/setproblem")
     @ResponseBody
     public boolean setproblem(ProblemDto problemDto) {
-        System.out.println(problemDto);
         return examService.setproblem(problemDto);
     }
+
+    //오류 접수
+    @PostMapping("/inserterror")
+    @ResponseBody
+    public boolean inserterror(ErrorDto entity){
+        String pass = SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println(pass);
+        if(pass.equals("anonymousUser")){ /* 로그인 아닐시 */
+            return false;
+        }else{ /* 로그인 */
+            // 회원 번호 빼오기
+            LoginDto loginDto = (LoginDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            int mno = loginDto.getMno();
+            // 서비스 호출
+            memberService.inserterror(entity, mno);
+            return true;
+        }
+
+    }
+
+
 }

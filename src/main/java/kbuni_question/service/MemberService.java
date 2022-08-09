@@ -1,7 +1,10 @@
 package kbuni_question.service;
 
+import kbuni_question.domain.board.ErrorboardEntity;
+import kbuni_question.domain.board.ErrorboardRepository;
 import kbuni_question.domain.member.MemberEntity;
 import kbuni_question.domain.member.MemberRepository;
+import kbuni_question.dto.ErrorDto;
 import kbuni_question.dto.LoginDto;
 import kbuni_question.dto.MemberDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +42,9 @@ public class MemberService implements UserDetailsService {
     @Autowired
     HttpServletRequest request; // 세션 사용을 위한 request 객체 선언
 
+    @Autowired
+    ErrorboardRepository errorboardRepository;
+
     /* 회원가입 처리 */
     @Transactional
     public boolean singup(MemberDto memberDto){
@@ -59,6 +65,23 @@ public class MemberService implements UserDetailsService {
             System.out.println("존재");
             return true;
         }
+    }
+
+    /* 오류 접수 */
+    @Transactional
+    public boolean inserterror(ErrorDto errorDto, int mno){
+
+        MemberEntity memberEntity = memberRepository.findById(mno).get();
+
+        ErrorboardEntity entity = errorDto.toentity();
+        errorboardRepository.save(entity);
+
+        // 오류 entity와 memberEntity join
+        memberEntity.getErrorboardEntityList().add(entity);
+        entity.setMemberEntity(memberEntity);
+
+        return true;
+
     }
 
 

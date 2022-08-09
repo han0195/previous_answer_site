@@ -136,7 +136,11 @@ function setproblem(){
         contentType: false,
         processData: false,
         success : function (re) {
-            alert(re);
+            if(re){
+                location.href = '/admin/pmanager';
+            }else{
+                alert("수정처리 에러");
+            }
         }
     });
 }

@@ -34,6 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession( true ) // 세션 초기화
                 .and()
                 .csrf()
+                .ignoringAntMatchers("/admin/inserterror")
                 .ignoringAntMatchers("/member/logincontroller") // 로그인
                 .ignoringAntMatchers("/member/login")
                 .ignoringAntMatchers("/admin/saveinfo")

@@ -48,6 +48,20 @@ public class ExamController {
         }
 
     }
+
+    //제목가져오기
+    @GetMapping("/gettitle")
+    public void gettitle(HttpServletResponse response, HttpServletRequest request){
+        try{
+            int tno = Integer.parseInt(request.getSession().getAttribute("tno").toString());
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("application/json");
+            response.getWriter().print(examService.gettitle(tno));
+        }catch (Exception e){
+            System.out.println("여기인가?" + e);
+        }
+    }
+
     //한문제 가져오기
     @PostMapping("/getproblem")
     public void getproblem(HttpServletResponse response, @RequestParam("pno") int pno){

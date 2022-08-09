@@ -13,7 +13,7 @@
         <div class="first_div_img">
             <div class="first_div_text">
                 <h1>기출풀이를 통해 시험공부하세요</h1>
-                <span> 현재준비된과 : 컴퓨터과학과 </span>
+                <span> 현재준비된과 : 컴퓨터과학과, 몇가지 교양 </span>
                 <div class="first_div_btn">
                     <button onclick="pasgemove('custom-cards')" type="button" class="btn btn-primary btn-lg">학습 시작</button>
                 </div>
@@ -121,10 +121,30 @@
                     <div>
                         <h2>열정많은 신입되고싶은개발자가 만들었어요!</h2>
                         <p>첫 배포 개인 프로젝트라서 오류가많을수도있습니다. 오류를 발견하면 아래 버튼을 클릭해서 메일로 보내주세요. (건의도 좋아요) 감사합니다^^</p>
-                        <a href="#" class="btn btn-primary">
+                        <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">
                             오류 있어요!
                         </a>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">오류 신고</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <textarea id="textarea" style="width: 100%" rows="5" placeholder="상세하게 적어주실수록 좋아요"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-primary" onclick="inserterror()">접수하기</button>
                 </div>
             </div>
         </div>
