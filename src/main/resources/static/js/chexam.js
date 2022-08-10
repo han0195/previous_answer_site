@@ -39,13 +39,13 @@ function testinfolist(dno){
             testinfo = re;
             let html = "";
             for(let i = 0 ; i < re.length ; i++){
-                if(darr.indexOf(re[i].dname) == -1 ){ /*동일한 이름이 존재하지않는다면*/
+                if(darr.indexOf(re[i].tname) == -1 ){ /*동일한 이름이 존재하지않는다면*/
                     html += '<div class="d-flex text-muted pt-3">';
                     html += '<p class="pb-3 mb-0 small lh-sm border-bottom divhover" onclick="infolist(\''+re[i].tname+'\')" style="width: 100%">';
                     html += '<strong class="d-block text-gray-dark">'+re[i].tname+'</strong>';
                     html += '</p>';
                     html += '</div>';
-                    darr.push(re[i].dname);
+                    darr.push(re[i].tname);
                 }
             }
             $("#infolistdiv"+dno+"").html(html);
