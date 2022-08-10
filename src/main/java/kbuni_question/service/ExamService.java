@@ -122,6 +122,24 @@ public class ExamService {
     @Transactional
     //문제 저장
     public boolean saveproblem(ProblemDto problemDto, int tno){
+        System.out.println("seaio");
+        // 문제 제목 및 인덱스 자르기
+            // 문제 잘라 놓기
+        String[] alls = problemDto.getPoption().split("\\.");
+
+            // 문제 인덱스
+        int index = Integer.parseInt(alls[0]);
+
+        problemDto.setPindex(index);
+
+            // 문제 제목
+        String title = alls[1].split("\\?")[0];
+        problemDto.setPname(title + "?");
+
+            // 문제 옵션
+        String option = alls[1].split("\\?")[1];
+        problemDto.setPoption(option);
+
 
         // pk값 test 가져오기
         TestinformationEntity testinformation = testinformationRepository.findById(tno).get();
@@ -131,7 +149,6 @@ public class ExamService {
         problemDto.setPoption(problemDto.getPoption().replace("②","_"));
         problemDto.setPoption(problemDto.getPoption().replace("③","_"));
         problemDto.setPoption(problemDto.getPoption().replace("④","_"));
-
 
         // problem 저장
         ProblemEntity problemEntity = problemDto.toentity();
