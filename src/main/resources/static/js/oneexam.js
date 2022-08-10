@@ -8,7 +8,7 @@ let chindex = '●';
 
 /* 정답 선택 */
 let count = 0;
-
+let answer = [];
 gettest();
 gettitle();
 
@@ -34,7 +34,7 @@ function gettest(){
         }
     });
 }
-let answer = [];
+
 /* 문제 보기 클릭이벤트 */
 function problemviewchick(num, overlap){
     if(overlap == -1){/* 복수 정답이 아니라면 */
@@ -153,20 +153,20 @@ function inserthtml(){
     if(testdata[viewcount].pimg.length == 0){ /* 사진이 존재하지않는다면 */
         html += '<div></div>'
     }else {
-        html += '<div><img width="50%" src="/examimg/'+testdata[viewcount].pimg[0]+'"></div>';
+        html += '<div><img width="100%" src="/examimg/'+testdata[viewcount].pimg[0]+'"></div>';
     }
     html += '<ul class="chul">';
     let anwser = testdata[viewcount].panswer.split("_");
     if(anwser.length > 1){
-        html += '<li><span id="prochick1" onclick="problemviewchick(1, 1);">①</span> '+testdata[viewcount].poption[0]+'</li>';
-        html += '<li><span id="prochick2" onclick="problemviewchick(2, 1)">②</span> '+testdata[viewcount].poption[1]+'</li>';
-        html += '<li><span id="prochick3" onclick="problemviewchick(3, 1)">③</span> '+testdata[viewcount].poption[2]+'</li>';
-        html += '<li><span id="prochick4" onclick="problemviewchick(4, 1)">④</span> '+testdata[viewcount].poption[3]+'</li>';
+        html += '<li onclick="problemviewchick(1, 1)"><span id="prochick1">①</span> '+testdata[viewcount].poption[0]+'</li>';
+        html += '<li onclick="problemviewchick(2, 1)"><span id="prochick2">②</span> '+testdata[viewcount].poption[1]+'</li>';
+        html += '<li onclick="problemviewchick(3, 1)"><span id="prochick3">③</span> '+testdata[viewcount].poption[2]+'</li>';
+        html += '<li onclick="problemviewchick(4, 1)"><span id="prochick4">④</span> '+testdata[viewcount].poption[3]+'</li>';
     }else{
-        html += '<li><span id="prochick1" onclick="problemviewchick(1, -1)">①</span> '+testdata[viewcount].poption[0]+'</li>';
-        html += '<li><span id="prochick2" onclick="problemviewchick(2, -1)">②</span> '+testdata[viewcount].poption[1]+'</li>';
-        html += '<li><span id="prochick3" onclick="problemviewchick(3, -1)">③</span> '+testdata[viewcount].poption[2]+'</li>';
-        html += '<li><span id="prochick4" onclick="problemviewchick(4, -1)">④</span> '+testdata[viewcount].poption[3]+'</li>';
+        html += '<li onclick="problemviewchick(1, 1)"><span id="prochick1">①</span> '+testdata[viewcount].poption[0]+'</li>';
+        html += '<li onclick="problemviewchick(2, -1)"><span id="prochick2">②</span> '+testdata[viewcount].poption[1]+'</li>';
+        html += '<li onclick="problemviewchick(3, -1)"><span id="prochick3">③</span> '+testdata[viewcount].poption[2]+'</li>';
+        html += '<li onclick="problemviewchick(4, -1)"><span id="prochick4">④</span> '+testdata[viewcount].poption[3]+'</li>';
     }
     html += '</ul>';
     html += '</div>';
@@ -196,19 +196,23 @@ function grading(){
     let html = "";
     if(answerte.length > 1){/* 만약 복수 정답이면*/
         let pass = [];
-        for(let i = 0; i < answercount ; i++){
-            if(answer.indexOf(parseInt(answerte[i])) != -1){ /* 정답이면 */
-                pass.push(true);
-            }else{
-                pass.push(false);
+        if(testdata[viewcount].panswer.split("_").length == answercount){ // 답길이 체크
+            for(let i = 0; i < answercount ; i++){
+                if(answer.indexOf(parseInt(answerte[i])) != -1){ /* 정답이면 */
+                    pass.push(true);
+                }else{
+                    pass.push(false);
+                }
             }
+        }else{
+            pass.push(false);
         }
         console.log(pass);
         if(pass.indexOf(false) != -1){ /* 오답 */
             html += '<div class="alert alert-danger" role="alert">';
             html += '틀렸습니다. 정답은: ';
             console.log(testdata[viewcount].panswer);
-            let temptext = testdata[viewcount].panswer.replace('_', ',')
+            let temptext = testdata[viewcount].panswer.replaceAll('_', ',')
             html += ''+temptext+'';
             html += '</div>';
         }else { /* 정답 */
@@ -241,6 +245,7 @@ function laquo(){
         alert("첫번째 문제입니다");
     }else{
         viewcount--;
+        answer = [];
         inserthtml();
     }
 }
@@ -250,6 +255,7 @@ function raquo(){
     // 페이지 전환 [ 예외 처리 전체길이랑 같으면 시험 종료 ]
     if(viewcount < testdata.length - 1){ /* 전체길이 안쪽이면 */
         viewcount++;
+        answer = [];
         $("#alertdiv").html("");
         inserthtml();
     }else{ /* 전체길이 랑 일치하면 */

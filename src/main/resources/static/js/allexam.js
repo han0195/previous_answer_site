@@ -61,9 +61,9 @@ function inserthtml(){
                 for(let z = 0; z < testdata[count].poption.length ; z++){ /* 문제보기 반복 */
                     if(testdata[count].panswer.length > 1){ /* 중복 답*/
                         let tempan = testdata[count].panswer;
-                        html += '<li><span id="problem'+z+'_'+testdata[count].pno+'" onclick="choice('+(z + 1)+', '+testdata[count].pno+', '+true+', \''+tempan+'\')">'+indexproblem[z]+'</span>'+testdata[count].poption[z]+'</li>';
+                        html += '<li onclick="choice('+(z + 1)+', '+testdata[count].pno+', '+true+', \''+tempan+'\')"><span id="problem'+z+'_'+testdata[count].pno+'">'+indexproblem[z]+'</span>'+testdata[count].poption[z]+'</li>';
                     }else{ /* 단일 답 */
-                        html += '<li><span id="problem'+z+'_'+testdata[count].pno+'" onclick="choice('+(z + 1)+', '+testdata[count].pno+', '+false+' , '+testdata[count].panswer+')">'+indexproblem[z]+'</span>'+testdata[count].poption[z]+'</li>';
+                        html += '<li onclick="choice('+(z + 1)+', '+testdata[count].pno+', '+false+' , '+testdata[count].panswer+')"><span id="problem'+z+'_'+testdata[count].pno+'">'+indexproblem[z]+'</span>'+testdata[count].poption[z]+'</li>';
                     }
                 }
                 html += '</ul>';
@@ -189,7 +189,7 @@ function grading(){
                    }
 
                    if(pass){ /* 틀림 */
-                       let temptext = user_choice_anwser[i].anwser.replace('_',',')
+                       let temptext = user_choice_anwser[i].anwser.replaceAll('_',',')
                        let html = '<div class="alert alert-danger" role="alert">' +
                            ' 틀렸습니다. 답: '+temptext+' '+
                            '</div>'
@@ -204,7 +204,7 @@ function grading(){
 
                }else{
                    // box div 출력
-                   let temptext = user_choice_anwser[i].anwser.replace('_',',')
+                   let temptext = user_choice_anwser[i].anwser.replaceAll('_',',')
                    let html = '<div class="alert alert-danger" role="alert">' +
                        ' 틀렸습니다. 답: '+temptext+' '+
                        '</div>'
