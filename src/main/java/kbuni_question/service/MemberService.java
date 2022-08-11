@@ -7,6 +7,8 @@ import kbuni_question.domain.member.MemberRepository;
 import kbuni_question.dto.ErrorDto;
 import kbuni_question.dto.LoginDto;
 import kbuni_question.dto.MemberDto;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,15 +18,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Member;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class MemberService implements UserDetailsService {
 
 
-    
+
     //로그인 서비스
     @Override
     public UserDetails loadUserByUsername(String mid) throws UsernameNotFoundException {
@@ -84,5 +86,42 @@ public class MemberService implements UserDetailsService {
 
     }
 
+    //오류 가져오기
+    public JSONArray geterrorlist(){
+
+        List<ErrorboardEntity> entities = errorboardRepository.findAll();
+
+        JSONArray jsonArray = new JSONArray();
+
+        for(ErrorboardEntity temp : entities){
+            JSONObject object = new JSONObject();
+            object.put("eno", temp.getEno());
+            object.put("solution", temp.getSolution());
+            object.put("econtent" , temp.getEcontent());
+            object.put("mname", temp.getMemberEntity().getMname());
+            jsonArray.put(object);
+        }
+        return jsonArray;
+    }
+    
+    // 오류테이블 삭제
+    @Transactional
+    public boolean dleleterror(int eno){
+        errorboardRepository.deleteById(eno);
+        return true;
+    }
+
+    // 오류테이블 변경
+    @Transactional
+    public boolean changestats(int eno, int ch){
+        if(ch == 1){ /* 해결 */
+            ErrorboardEntity entity = errorboardRepository.findById(eno).get();
+            entity.setSolution(1);
+        }else{ /* 대기 */
+            ErrorboardEntity entity = errorboardRepository.findById(eno).get();
+            entity.setSolution(0);
+        }
+        return true;
+    }
 
 }

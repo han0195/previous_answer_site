@@ -154,6 +154,30 @@ public class AdminController {
         }
 
     }
+    @GetMapping("/geterrorlist")
+    public void geterrorlist(HttpServletResponse response){
+        try {
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().print(memberService.geterrorlist());
+        }catch (Exception e){
+            System.out.println("오류가져오기 에러" + e);
+        }
+    }
 
+    // 오류테이블 삭제
+    @DeleteMapping("/deleterror")
+    @ResponseBody
+    public boolean deleterror(@RequestParam("eno") int eno){
+        boolean pass = memberService.dleleterror(eno);
+        return pass;
+    }
+    // 오류테이블 변경
+    @GetMapping("changestats")
+    @ResponseBody
+    public boolean changstats(@RequestParam("eno") int eno, @RequestParam("ch") int ch){
+        boolean pass = memberService.changestats(eno, ch);
+        return pass;
+    }
 
 }

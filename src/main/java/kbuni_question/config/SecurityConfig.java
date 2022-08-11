@@ -18,6 +18,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests()
+                .antMatchers("/admin/main").hasRole("ADMIN")
                 .antMatchers("/**").permitAll()
                 .and()
                 .formLogin()
@@ -34,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession( true ) // 세션 초기화
                 .and()
                 .csrf()
+                .ignoringAntMatchers("/admin/deleterror")
                 .ignoringAntMatchers("/admin/inserterror")
                 .ignoringAntMatchers("/member/logincontroller") // 로그인
                 .ignoringAntMatchers("/member/login")
