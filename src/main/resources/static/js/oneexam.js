@@ -264,3 +264,8 @@ function raquo(){
     }
 
 }
+
+/* 댓글 가져오기 */
+function getreplylist(){
+
+}
